@@ -1,0 +1,150 @@
+import "strings"
+import "types"
+
+_modules = {
+	"root": {
+		"data":    {},
+		"modules": {},
+		"outputs": {},
+		"providers": {
+			"aws": {
+				"alias": {
+					"": {
+						"config": {},
+						"references": {
+							"region": [
+								"var.aws_region",
+							],
+						},
+						"version": "",
+					},
+				},
+				"config": {},
+				"references": {
+					"region": [
+						"var.aws_region",
+					],
+				},
+				"version": "",
+			},
+		},
+		"resources": {
+			"aws_kms_key": {
+				"a": {
+					"config": {
+						"deletion_window_in_days": 10,
+						"description":             "KMS key 1",
+					},
+					"provisioners": null,
+					"references": {
+						"deletion_window_in_days": [],
+						"description":             [],
+					},
+				},
+			},
+			"aws_s3_bucket": {
+				"bucket": {
+					"config": {
+						"server_side_encryption_configuration": [
+							{
+								"rule": [
+									{
+										"apply_server_side_encryption_by_default": [
+											{
+												"sse_algorithm": "aws:kms",
+											},
+										],
+									},
+								],
+							},
+						],
+						"tags": {
+							"owner": "sentinel",
+						},
+					},
+					"provisioners": null,
+					"references": {
+						"bucket": [
+							"var.bucket_name",
+						],
+						"server_side_encryption_configuration": [
+							{
+								"rule": [
+									{
+										"apply_server_side_encryption_by_default": [
+											{
+												"kms_master_key_id": [
+													"aws_kms_key.a.arn",
+													"aws_kms_key.a",
+												],
+												"sse_algorithm": [],
+											},
+										],
+									},
+								],
+							},
+						],
+						"tags": [],
+					},
+				},
+			},
+			"aws_s3_bucket_policy": {
+				"b": {
+					"config":       {},
+					"provisioners": null,
+					"references": {
+						"bucket": [
+							"aws_s3_bucket.bucket.id",
+							"aws_s3_bucket.bucket",
+						],
+						"policy": [
+							"aws_s3_bucket.bucket.id",
+							"aws_s3_bucket.bucket",
+							"aws_kms_key.a.arn",
+							"aws_kms_key.a",
+						],
+					},
+				},
+			},
+		},
+		"variables": {
+			"aws_region": {
+				"default":     "us-east-1",
+				"description": "AWS region",
+			},
+			"bucket_name": {
+				"default":     "decay-test-s3-sentinel-bucket",
+				"description": "Name of the bucket to create",
+			},
+		},
+	},
+}
+
+module_paths = [
+	[],
+]
+
+module = func(path) {
+	if types.type_of(path) is not "list" {
+		error("expected list, got", types.type_of(path))
+	}
+
+	if length(path) < 1 {
+		return _modules.root
+	}
+
+	addr = []
+	for path as p {
+		append(addr, "module")
+		append(addr, p)
+	}
+
+	return _modules[strings.join(addr, ".")]
+}
+
+data = _modules.root.data
+modules = _modules.root.modules
+providers = _modules.root.providers
+resources = _modules.root.resources
+variables = _modules.root.variables
+outputs = _modules.root.outputs

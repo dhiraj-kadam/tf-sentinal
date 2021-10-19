@@ -1,0 +1,47 @@
+id = "run-x2oejSVVBvd3QX86"
+created_at = "2021-10-19T16:02:44.019Z"
+message = "added policy"
+commit_sha = "462085032c8b657f04d4aa125fc26a6098752b69"
+speculative = false
+is_destroy = false
+refresh = true
+refresh_only = false
+replace_addrs = null
+target_addrs = null
+
+variables = {
+	"AWS_ACCESS_KEY_ID": {
+		"category":  "env",
+		"sensitive": true,
+	},
+	"AWS_SECRET_ACCESS_KEY": {
+		"category":  "env",
+		"sensitive": true,
+	},
+}
+
+organization = {
+	"name": "dkadam-local",
+}
+
+workspace = {
+	"auto_apply":  false,
+	"created_at":  "2021-10-19T15:08:57.899Z",
+	"description": null,
+	"id":          "ws-SUbNXEYtLcRtnvj4",
+	"name":        "tf-sentinal",
+	"tags":        [],
+	"vcs_repo": {
+		"branch":             "",
+		"display_identifier": "dhiraj-kadam/tf-sentinal",
+		"identifier":         "dhiraj-kadam/tf-sentinal",
+		"ingress_submodules": false,
+	},
+	"working_directory": "",
+}
+
+cost_estimate = {
+	"delta_monthly_cost":    "1.00000000000000272",
+	"prior_monthly_cost":    "0.0",
+	"proposed_monthly_cost": "1.00000000000000272",
+}

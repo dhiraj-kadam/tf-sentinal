@@ -1,0 +1,379 @@
+import "strings"
+import "types"
+
+_modules = {
+	"root": {
+		"data": {},
+		"path": [],
+		"resources": {
+			"aws_kms_key": {
+				"a": {
+					0: {
+						"applied": {
+							"bypass_policy_lockout_safety_check": false,
+							"customer_master_key_spec":           "SYMMETRIC_DEFAULT",
+							"deletion_window_in_days":            10,
+							"description":                        "KMS key 1",
+							"enable_key_rotation":                false,
+							"is_enabled":                         true,
+							"key_usage":                          "ENCRYPT_DECRYPT",
+							"tags":                               null,
+						},
+						"destroy": false,
+						"diff": {
+							"arn": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"bypass_policy_lockout_safety_check": {
+								"computed": false,
+								"new":      "false",
+								"old":      "",
+							},
+							"customer_master_key_spec": {
+								"computed": false,
+								"new":      "SYMMETRIC_DEFAULT",
+								"old":      "",
+							},
+							"deletion_window_in_days": {
+								"computed": false,
+								"new":      "10",
+								"old":      "",
+							},
+							"description": {
+								"computed": false,
+								"new":      "KMS key 1",
+								"old":      "",
+							},
+							"enable_key_rotation": {
+								"computed": false,
+								"new":      "false",
+								"old":      "",
+							},
+							"id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"is_enabled": {
+								"computed": false,
+								"new":      "true",
+								"old":      "",
+							},
+							"key_id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"key_usage": {
+								"computed": false,
+								"new":      "ENCRYPT_DECRYPT",
+								"old":      "",
+							},
+							"policy": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"tags": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"tags_all.%": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+						},
+						"requires_new": false,
+					},
+				},
+			},
+			"aws_s3_bucket": {
+				"bucket": {
+					0: {
+						"applied": {
+							"acl":                       "private",
+							"bucket":                    "decay-test-s3-sentinel-bucket",
+							"bucket_prefix":             null,
+							"cors_rule":                 [],
+							"force_destroy":             false,
+							"grant":                     [],
+							"lifecycle_rule":            [],
+							"logging":                   [],
+							"object_lock_configuration": [],
+							"policy":                    null,
+							"replication_configuration": [],
+							"server_side_encryption_configuration": [
+								{
+									"rule": [
+										{
+											"apply_server_side_encryption_by_default": [
+												{
+													"sse_algorithm": "aws:kms",
+												},
+											],
+											"bucket_key_enabled": null,
+										},
+									],
+								},
+							],
+							"tags": {
+								"owner": "sentinel",
+							},
+							"tags_all": {
+								"owner": "sentinel",
+							},
+							"website": [],
+						},
+						"destroy": false,
+						"diff": {
+							"acceleration_status": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"acl": {
+								"computed": false,
+								"new":      "private",
+								"old":      "",
+							},
+							"arn": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"bucket": {
+								"computed": false,
+								"new":      "decay-test-s3-sentinel-bucket",
+								"old":      "",
+							},
+							"bucket_domain_name": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"bucket_prefix": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"bucket_regional_domain_name": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"cors_rule.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"force_destroy": {
+								"computed": false,
+								"new":      "false",
+								"old":      "",
+							},
+							"grant.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"hosted_zone_id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"lifecycle_rule.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"logging.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"object_lock_configuration.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"policy": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"region": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"replication_configuration.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"request_payer": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"server_side_encryption_configuration.#": {
+								"computed": false,
+								"new":      "1",
+								"old":      "",
+							},
+							"server_side_encryption_configuration.0.%": {
+								"computed": false,
+								"new":      "1",
+								"old":      "",
+							},
+							"server_side_encryption_configuration.0.rule.#": {
+								"computed": false,
+								"new":      "1",
+								"old":      "",
+							},
+							"server_side_encryption_configuration.0.rule.0.%": {
+								"computed": false,
+								"new":      "2",
+								"old":      "",
+							},
+							"server_side_encryption_configuration.0.rule.0.apply_server_side_encryption_by_default.#": {
+								"computed": false,
+								"new":      "1",
+								"old":      "",
+							},
+							"server_side_encryption_configuration.0.rule.0.apply_server_side_encryption_by_default.0.%": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"server_side_encryption_configuration.0.rule.0.apply_server_side_encryption_by_default.0.kms_master_key_id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"server_side_encryption_configuration.0.rule.0.apply_server_side_encryption_by_default.0.sse_algorithm": {
+								"computed": false,
+								"new":      "aws:kms",
+								"old":      "",
+							},
+							"server_side_encryption_configuration.0.rule.0.bucket_key_enabled": {
+								"computed": false,
+								"new":      "",
+								"old":      "",
+							},
+							"tags.%": {
+								"computed": false,
+								"new":      "1",
+								"old":      "",
+							},
+							"tags.owner": {
+								"computed": false,
+								"new":      "sentinel",
+								"old":      "",
+							},
+							"tags_all.%": {
+								"computed": false,
+								"new":      "1",
+								"old":      "",
+							},
+							"tags_all.owner": {
+								"computed": false,
+								"new":      "sentinel",
+								"old":      "",
+							},
+							"versioning.#": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"website.#": {
+								"computed": false,
+								"new":      "0",
+								"old":      "",
+							},
+							"website_domain": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"website_endpoint": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+						},
+						"requires_new": false,
+					},
+				},
+			},
+			"aws_s3_bucket_policy": {
+				"b": {
+					0: {
+						"applied": {},
+						"destroy": false,
+						"diff": {
+							"bucket": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"id": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+							"policy": {
+								"computed": true,
+								"new":      "",
+								"old":      "",
+							},
+						},
+						"requires_new": false,
+					},
+				},
+			},
+		},
+	},
+}
+
+module_paths = [
+	[],
+]
+
+terraform_version = "1.0.9"
+
+variables = {
+	"aws_region":  "us-east-1",
+	"bucket_name": "decay-test-s3-sentinel-bucket",
+}
+
+module = func(path) {
+	if types.type_of(path) is not "list" {
+		error("expected list, got", types.type_of(path))
+	}
+
+	if length(path) < 1 {
+		return _modules.root
+	}
+
+	addr = []
+	for path as p {
+		append(addr, "module")
+		append(addr, p)
+	}
+
+	return _modules[strings.join(addr, ".")]
+}
+
+data = _modules.root.data
+path = _modules.root.path
+resources = _modules.root.resources
