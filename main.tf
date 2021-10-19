@@ -33,7 +33,7 @@ resource "aws_s3_bucket" "bucket" {
         Effect    = "Deny"
         Principal = "*"
         Action    = "s3:Put*"
-        Resource = "arn:aws:s3:::${aws_s3_bucket.bucket.id}/*"
+        Resource = "arn:aws:s3:::${var.bucket_name}/*"
         Condition = {
           StringNotEquals = {
             "s3:x-amz-server-side-encryption-aws-kms-key-id" = "${aws_kms_key.a.arn}"
@@ -42,7 +42,7 @@ resource "aws_s3_bucket" "bucket" {
       },
     ]
   })
-  
+
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
