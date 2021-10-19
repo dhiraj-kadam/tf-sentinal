@@ -40,7 +40,7 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_s3_bucket_policy" "b" {
-  bucket = aws_s3_bucket.b.id
+  bucket = aws_s3_bucket.bucket.id
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression's result to valid JSON syntax.
