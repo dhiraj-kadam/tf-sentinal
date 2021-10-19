@@ -16,6 +16,11 @@ provider "aws" {
   region = "${var.aws_region}"
 }
 
+
+resource "aws_kms_key" "a" {
+  description             = "KMS key 1"
+  deletion_window_in_days = 10
+}
 resource "aws_s3_bucket" "bucket" {
   bucket = "${var.bucket_name}"
   
@@ -23,7 +28,7 @@ resource "aws_s3_bucket" "bucket" {
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        kms_master_key_id = "arn:aws:kms:us-east-1:753646501470:key/00c892e8-40c4-4048-a650-0f755876503d"
+        kms_master_key_id = aws_kms_key.a.arn
         sse_algorithm     = "aws:kms"
       }
     }
@@ -32,4 +37,29 @@ resource "aws_s3_bucket" "bucket" {
   tags = {
     owner = "sentinel"
   }
+}
+
+resource "aws_s3_bucket_policy" "b" {
+  bucket = aws_s3_bucket.b.id
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression's result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Id      = "MYBUCKETPOLICY"
+    Statement = [
+      {
+        Sid       = "enforce-https"
+        Effect    = "Deny"
+        Principal = "*"
+        Action    = "s3:Put*"
+        Resource = "arn:aws:s3:::${aws_s3_bucket.bucket.id}/*"
+        Condition = {
+          StringNotEquals = {
+            "s3:x-amz-server-side-encryption-aws-kms-key-id" = "${aws_kms_key.a.arn}"
+          }
+        }
+      },
+    ]
+  })
 }
