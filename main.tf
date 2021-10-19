@@ -23,38 +23,19 @@ resource "aws_kms_key" "a" {
 }
 resource "aws_s3_bucket" "bucket" {
   bucket = "${var.bucket_name}"
-  
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Id      = "MYBUCKETPOLICY"
-    Statement = [
-      {
-        Sid       = "enforce-https"
-        Effect    = "Deny"
-        Principal = "*"
-        Action    = "s3:Put*"
-        Resource = "arn:aws:s3:::${var.bucket_name}/*"
-        Condition = {
-          StringNotEquals = {
-            "s3:x-amz-server-side-encryption-aws-kms-key-id" = "${aws_kms_key.a.arn}"
-          }
-        }
-      },
-    ]
-  })
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        kms_master_key_id = aws_kms_key.a.arn
-        sse_algorithm     = "aws:kms"
-      }
-    }
-  }
+  # server_side_encryption_configuration {
+  #   rule {
+  #     apply_server_side_encryption_by_default {
+  #       kms_master_key_id = aws_kms_key.a.arn
+  #       sse_algorithm     = "aws:kms"
+  #     }
+  #   }
+  # }
 
-  tags = {
-    owner = "sentinel"
-  }
+  # tags = {
+  #   owner = "sentinel"
+  # }
 }
 
 # resource "aws_s3_bucket_policy" "b" {
