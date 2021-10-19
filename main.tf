@@ -24,18 +24,18 @@ resource "aws_kms_key" "a" {
 resource "aws_s3_bucket" "bucket" {
   bucket = "${var.bucket_name}"
 
-  # server_side_encryption_configuration {
-  #   rule {
-  #     apply_server_side_encryption_by_default {
-  #       kms_master_key_id = aws_kms_key.a.arn
-  #       sse_algorithm     = "aws:kms"
-  #     }
-  #   }
-  # }
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        kms_master_key_id = aws_kms_key.a.arn
+        sse_algorithm     = "aws:kms"
+      }
+    }
+  }
 
-  # tags = {
-  #   owner = "sentinel"
-  # }
+  tags = {
+    owner = "sentinel"
+  }
 }
 
 # resource "aws_s3_bucket_policy" "b" {
