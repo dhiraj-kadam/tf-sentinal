@@ -1,3 +1,4 @@
- policy "enforce-s3-versioning-enabled-true" {
-    enforcement_level = "soft-mandatory"
+ policy "enforce-s3-server-side-encryption-enabled-true" {
+    source            = "./tenforce-s3-server-side-encryption-enabled-true.sentinel"
+    enforcement_level = "hard-mandatory"
 }
